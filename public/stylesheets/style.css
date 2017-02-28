@@ -1,0 +1,34 @@
+table, th, td {
+    margin: 0 auto;
+    text-align: center;
+    padding: 3px;
+}
+
+th {
+    text-align: center;
+    padding: 5px;
+}
+
+td {
+    text-align: left;
+}
+
+.search {
+    margin: 0 auto;
+    width: 50%;
+}
+
+.main {
+    text-align: center;
+}
+
+body {
+    font-family: 'Abhaya Libre';font-size: 18px;
+}
+
+img {
+    height: auto;
+    width: auto;
+    max-width: 143px;
+    max-height: 182px;
+}
