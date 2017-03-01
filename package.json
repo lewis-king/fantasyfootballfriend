@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "postinstall": "webpack.js -p",
+    "postinstall": "webpack -p",
     "start": "babel-node ./bin/www"
   },
   "dependencies": {
