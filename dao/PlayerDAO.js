@@ -6,6 +6,7 @@ const PLAYER_DATA_MODEL = 'PlayerData';
 
 function persistPlayerData(allPlayerData) {
     var PlayerData = mongoose.model(PLAYER_DATA_MODEL, PlayerDataSchema);
+    PlayerData.remove({})
     var playerArr = [];
     allPlayerData.elements.forEach(p => {
         var player = new PlayerData({
@@ -21,7 +22,8 @@ function persistPlayerData(allPlayerData) {
             , dreamTeamCount      : p.dreamteam_count
             , selectedByPercent      : p.selected_by_percent
             , form      : p.form
-            , pointsPerGame      : p.points_per_game
+            , totalPoints : p.total_points
+            , avgPointsPerGame      : p.points_per_game
             , goalsScored      : p.goals_scored
             , assists      : p.assists
             , cleanSheets      : p.clean_sheets
@@ -37,7 +39,6 @@ function persistPlayerData(allPlayerData) {
         })
         playerArr.push(player);
     });
-    PlayerData.remove({})
     PlayerData.create(playerArr, function(err, results) {
         if (err) return console.error(err);
         console.log(`Players saved to the DB`)

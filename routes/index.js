@@ -12,6 +12,8 @@ router.get('/', function (req, res, next) {
 
 router.get('/PLData', function (req, res, next) {
     var payload = playerService.saveAllPlayerData();
+    res.send('Request Sent');
+
 });
 
 router.get('/allPlayers', function (req, res, next) {

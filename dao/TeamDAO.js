@@ -21,8 +21,8 @@ function persistTeamData(allPlayerData) {
             , strengthAttackAway      : t.strength_attack_away
             , strengthDefenceHome      : t.strength_defence_home
             , strengthDefenceAway      : t.strength_defence_away
-            , lastOpponentId      : t.current_event_fixture[0].opponent
-            , homeToLastOpponent      : t.current_event_fixture[0].is_home
+            , lastOpponentId      : t.current_event_fixture.length > 0 ? t.current_event_fixture[0].opponent : null
+            , homeToLastOpponent      : t.current_event_fixture.length > 0 ? t.current_event_fixture[0].is_home : null
             , nextOpponentId      : t.next_event_fixture.length > 0 ? t.next_event_fixture[0].opponent : null
             , homeToNextOpponent      : t.next_event_fixture.length > 0 ? t.next_event_fixture[0].is_home : null
         })
@@ -31,6 +31,7 @@ function persistTeamData(allPlayerData) {
     TeamData.remove({})
     TeamData.create(teamArr, function(err, results) {
         if (err) return console.error(err);
+        console.log(`Teams saved to the DB`)
     })
 }
 

@@ -13,7 +13,8 @@ var PlayerDataSchema = new Schema({
     , dreamTeamCount      : Number
     , selectedByPercent      : Number
     , form      : Number
-    , pointsPerGame      : Number
+    , totalPoints : Number
+    , avgPointsPerGame      : Number
     , goalsScored      : Number
     , assists      : Number
     , cleanSheets      : Number

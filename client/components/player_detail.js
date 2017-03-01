@@ -32,16 +32,24 @@ class PlayerDetail extends Component {
                         <td>{this.props.playerDetail.form}</td>
                     </tr>
                     <tr>
-                        <td>Transfer Fee</td>
+                        <td>Transfer fee</td>
                         <td><NumberFormat value={this.props.playerDetail.costNow} displayType={'text'}
                                           thousandSeparator={true} prefix={'£'}/></td>
+                    </tr>
+                    <tr>
+                        <td>Total points</td>
+                        <td>{this.props.playerDetail.totalPoints}</td>
+                    </tr>
+                    <tr>
+                        <td>Avg. Points per game</td>
+                        <td>{this.props.playerDetail.avgPointsPerGame}</td>
                     </tr>
                     <tr>
                         <td>Selected by</td>
                         <td>{this.props.playerDetail.selectedByPercent}%</td>
                     </tr>
                     <tr>
-                        <td>Goals Scored</td>
+                        <td>Goals scored</td>
                         <td>{this.props.playerDetail.goalsScored}</td>
                     </tr>
                     <tr>
