@@ -41,6 +41,7 @@ router.get('/player/:playerId', function (req, res, next) {
     var payload = playerService.retrieveAllPlayerData();
 });
 
+
 router.get('/allTeams', function (req, res, next) {
     teamService.retrieveAllTeamData(function (payload) {
         res.setHeader('Content-Type', 'application/json');

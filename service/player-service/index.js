@@ -22,6 +22,10 @@ function retrievePlayerByName(name, callback) {
     playerDataDAO.retrievePlayerByName(name, callback);
 }
 
+function retrievePlayerByCriteria(body) {
+    playerDataDAO.retrievePlayerByCriteria(body, callback);
+}
+
 function retrieveAllPlayersNames(callback) {
     playerDataDAO.retrieveAllPlayersNames(callback);
 }
@@ -30,5 +34,6 @@ module.exports = {
     saveAllPlayerData: saveAllPlayerAndTeamData,
     retrieveAllPlayerData: retrieveAllPlayerData,
     retrievePlayerByName: retrievePlayerByName,
+    retrievePlayerByCriteria: retrievePlayerByCriteria,
     retrieveAllPlayersNames : retrieveAllPlayersNames
 }

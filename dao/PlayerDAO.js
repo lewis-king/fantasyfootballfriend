@@ -65,6 +65,15 @@ module.exports = class PlayerDataDAO {
         });
     }
 
+    retrievePlayerByCriteria(body, callback) {
+        var PlayerData = mongoose.model(PLAYER_DATA_MODEL, PlayerDataSchema);
+        PlayerData.findOne({
+            position: body.pos,
+            costNow: { $lt: body.price},
+        }).
+        exec(callback);
+    }
+
     retrieveAllPlayersNames(callback) {
         var PlayerData = mongoose.model(PLAYER_DATA_MODEL, PlayerDataSchema);
         PlayerData.find( {}, '-_id fullName', function (err, player) {

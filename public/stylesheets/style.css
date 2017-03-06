@@ -32,3 +32,11 @@ img {
     max-width: 143px;
     max-height: 182px;
 }
+
+.btn-toolbar{
+    text-align: center;
+}​
+
+.btn-success{
+     background-color: #2b669a;
+}​

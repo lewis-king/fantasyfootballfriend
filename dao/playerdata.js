@@ -5,6 +5,7 @@ var PlayerDataSchema = new Schema({
     , lastName: String
     , fullName : String
     , photoId      : String
+    , position : Number
     , status      : String
     , teamCode      : Number
     , costNow      : Number
