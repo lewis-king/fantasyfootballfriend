@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import Select from 'react-select';
 import Slider from 'react-rangeslider'
 import {connect} from 'react-redux';
-import {fetchPlayersNames, fetchPlayerData, fetchTeams} from '../actions/index';
+import {fetchPlayersNames, fetchPlayerData, fetchTeams, fetchPlayerDataByCriteria} from '../actions/index';
 
 class SearchBar extends Component {
 
@@ -10,7 +10,8 @@ class SearchBar extends Component {
         this.props.fetchPlayersNames();
         this.props.fetchTeams();
         this.state = {
-            priceVal: 0
+            price: 0,
+            pos: "Goalkeeper"
         }
     }
 
@@ -35,36 +36,28 @@ class SearchBar extends Component {
 
     handleOnChange = (val) => {
         this.setState({
-            priceVal: val
+            price: val
         })
     }
 
-    posVal = (val) => {
-        console.log(val);
+    posVal = (event) => {
         this.setState({
-            posVal: val
+            pos: event.target.value
         })
     }
 
     searchSubmit = () => {
-        console.log(this.state.posVal)
-/*        fetch('https://mywebsite.com/endpoint/', {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                firstParam: 'yourValue',
-                secondParam: 'yourOtherValue',
-            })
-        })*/
+        let criteria = {
+            posId: this.state.pos,
+            budget: this.state.price
+        }
+        this.props.fetchPlayerDataByCriteria(criteria)
     }
 
     render() {
-        let {priceVal} = this.state
-        const formatMillions = priceVal => {
-            return (Math.round(priceVal * 10) / 10) + ' Mil (£)';
+        let {price} = this.state
+        const formatMillions = price => {
+            return (Math.round(price * 10) / 10) + ' Mil (£)';
         }
         return (
             <div>
@@ -77,8 +70,9 @@ class SearchBar extends Component {
                 />
                 <div>
                     <div className="slider-horizontal">
+                        <strong>Or search by budget and position</strong>
                         <Slider
-                            value={priceVal}
+                            value={price}
                             orientation="horizontal"
                             min={0.0}
                             max={15.0}
@@ -87,14 +81,15 @@ class SearchBar extends Component {
                             onChange={this.handleOnChange}
                         />
                     </div>
-                    <div className="btn-toolbar">
-                        <div className="btn-group" role="group" aria-label="...">
-                            <button type="button" onClick={this.posVal} className="btn btn-default">GK</button>
-                            <button type="button" onClick={this.posVal} className="btn btn-default">DEF</button>
-                            <button type="button" onClick={this.posVal} className="btn btn-default">MID</button>
-                            <button type="button" onClick={this.posVal} className="btn btn-default">ATT</button>
-                        </div>
-                        <button type="submit" onClick={this.searchSubmit} className="btn btn-success">Submit</button>
+                    <div className="dropdown">
+                        <select className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" value={this.state.pos} onChange={this.posVal}>
+                            <option value="GK">Goalkeeper</option>
+                            <option value="DEF">Defender</option>
+                            <option value="MID">Midfielder</option>
+                            <option value="FWD">Forward</option>
+                        </select>
+                        &nbsp;&nbsp;&nbsp;
+                        <button type="submit" onClick={this.searchSubmit} className="btn btn-primary">Find</button>
                     </div>
                 </div>
             </div>
@@ -110,4 +105,4 @@ function mapStateToProps(state) {
     }
 }
 
-export default connect(mapStateToProps, {fetchPlayersNames, fetchPlayerData, fetchTeams})(SearchBar);
+export default connect(mapStateToProps, {fetchPlayersNames, fetchPlayerData, fetchTeams, fetchPlayerDataByCriteria})(SearchBar);

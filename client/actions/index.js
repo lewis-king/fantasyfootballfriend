@@ -25,6 +25,18 @@ export function fetchPlayerData(name) {
     };
 }
 
+export function fetchPlayerDataByCriteria(criteria) {
+    let {posId, budget} = criteria
+    const request = axios.post('/players', {
+            posId,
+            budget
+    })
+    return {
+        type: FETCH_PLAYER_DATA,
+        payload: request
+    }
+}
+
 export function fetchTeams() {
     const request = axios.get(FETCH_TEAMS_URL);
 

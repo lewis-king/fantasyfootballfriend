@@ -4,6 +4,23 @@ import NumberFormat from 'react-number-format';
 
 class PlayerDetail extends Component {
 
+    componentWillMount() {
+        this.state = {
+            counter: 0
+        }
+    }
+
+    increment = () => {
+        this.setState({
+            counter: this.state.counter + 1
+        })
+        if (this.props.playerDetail.length == this.state.counter + 1) {
+            this.setState({
+                counter: 0
+            })
+        }
+    }
+
     getTeam = (teamCode) => {
         const allTeams = this.props.teams;
         return allTeams.find((team) => {
@@ -12,8 +29,21 @@ class PlayerDetail extends Component {
     }
 
     render() {
+        var playerDetails = this.props.playerDetail
+        var playerDetail
+        const sizeNotOne = playerDetails.length != 1;
+        //TODO: temp conditional logic until I implement resetting of counter between
+        //new searches correctly.
+        if (sizeNotOne) {
+            playerDetail = playerDetails[this.state.counter]
+        } else {
+            playerDetail = playerDetails[0]
+        }
+
+
+        if (playerDetail == null) return null;
         var nextOpponent = '';
-        const team = this.getTeam(this.props.playerDetail.teamCode)
+        const team = this.getTeam(playerDetail.teamCode)
         if (team != null) {
             nextOpponent = this.getTeam(team.nextOpponentId) || {name: 'None'};
         } else {
@@ -21,56 +51,56 @@ class PlayerDetail extends Component {
         }
         return (
             <div>
-                <img src={this.props.playerDetail.photoId}></img>
+                <img src={playerDetail.photoId}></img>
                 <table>
                     <tbody>
                     <tr>
-                        <th colSpan="2">{this.props.playerDetail.fullName}</th>
+                        <th colSpan="2">{playerDetail.fullName}</th>
                     </tr>
                     <tr>
                         <td>Form</td>
-                        <td>{this.props.playerDetail.form}</td>
+                        <td>{playerDetail.form}</td>
                     </tr>
                     <tr>
                         <td>Transfer fee</td>
-                        <td><NumberFormat value={this.props.playerDetail.costNow} displayType={'text'}
+                        <td><NumberFormat value={playerDetail.costNow} displayType={'text'}
                                           thousandSeparator={true} prefix={'£'}/></td>
                     </tr>
                     <tr>
                         <td>Total points</td>
-                        <td>{this.props.playerDetail.totalPoints}</td>
+                        <td>{playerDetail.totalPoints}</td>
                     </tr>
                     <tr>
                         <td>Avg. Points per game</td>
-                        <td>{this.props.playerDetail.avgPointsPerGame}</td>
+                        <td>{playerDetail.avgPointsPerGame}</td>
                     </tr>
                     <tr>
                         <td>Selected by</td>
-                        <td>{this.props.playerDetail.selectedByPercent}%</td>
+                        <td>{playerDetail.selectedByPercent}%</td>
                     </tr>
                     <tr>
                         <td>Goals scored</td>
-                        <td>{this.props.playerDetail.goalsScored}</td>
+                        <td>{playerDetail.goalsScored}</td>
                     </tr>
                     <tr>
                         <td>Assists</td>
-                        <td>{this.props.playerDetail.assists}</td>
+                        <td>{playerDetail.assists}</td>
                     </tr>
                     <tr>
                         <td>No. times in Dream Team</td>
-                        <td>{this.props.playerDetail.dreamTeamCount}</td>
+                        <td>{playerDetail.dreamTeamCount}</td>
                     </tr>
                     <tr>
                         <td>Influence</td>
-                        <td>{this.props.playerDetail.influence}</td>
+                        <td>{playerDetail.influence}</td>
                     </tr>
                     <tr>
                         <td>Creativity</td>
-                        <td>{this.props.playerDetail.creativity}</td>
+                        <td>{playerDetail.creativity}</td>
                     </tr>
                     <tr>
                         <td>Threat</td>
-                        <td>{this.props.playerDetail.threat}</td>
+                        <td>{playerDetail.threat}</td>
                     </tr>
                     <tr>
                         <td>Upcoming opposition</td>
@@ -78,14 +108,21 @@ class PlayerDetail extends Component {
                     </tr>
                     </tbody>
                 </table>
+                {sizeNotOne ? (
+                        <div>
+                            <button type="submit" onClick={this.increment} className="btn btn-primary">Next</button>
+                        </div>
+                    ) : (<div></div>)}
             </div>
         );
     }
 }
 
 function mapStateToProps(state) {
-    return {playerDetail: state.playerDetail,
-            teams: state.teams}
+    return {
+        playerDetail: state.playerDetail,
+        teams: state.teams
+    }
 }
 
 export default connect(mapStateToProps, {null})(PlayerDetail);

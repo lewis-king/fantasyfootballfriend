@@ -1,6 +1,6 @@
 import { FETCH_PLAYER_DATA } from '../actions/index';
 
-const INITIAL_STATE = {playerDetail: {costNow: ''} };
+const INITIAL_STATE = [];
 
 export default function(state = INITIAL_STATE, action) {
     switch(action.type) {

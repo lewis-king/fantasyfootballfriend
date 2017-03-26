@@ -5,11 +5,13 @@ var PlayerDataSchema = new Schema({
     , lastName: String
     , fullName : String
     , photoId      : String
-    , position : Number
+    , positionId : Number
     , status      : String
     , teamCode      : Number
     , costNow      : Number
     , costChangeStart      : Number
+    , chanceOfPlayingThisRoundPercent : Number
+    , chanceOfPlayingNextRoundPercent : Number
     , inDreamTeam      : Boolean
     , dreamTeamCount      : Number
     , selectedByPercent      : Number

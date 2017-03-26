@@ -23,7 +23,8 @@ td {
 }
 
 body {
-    font-family: 'Abhaya Libre';font-size: 18px;
+    font-family: 'Abhaya Libre';
+    font-size: 18px;
 }
 
 img {
@@ -33,10 +34,8 @@ img {
     max-height: 182px;
 }
 
-.btn-toolbar{
+.btn-toolbar {
     text-align: center;
-}​
+}
 
-.btn-success{
-     background-color: #2b669a;
-}​
+​

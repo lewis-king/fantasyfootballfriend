@@ -3,6 +3,8 @@ var mongoose = require('mongoose');
 var connection = require('./dbconnection');
 var PlayerDataSchema = require('./playerdata');
 const PLAYER_DATA_MODEL = 'PlayerData';
+var Constants = require('../service/rules/constants');
+import filterPlayers from '../service/rules';
 
 function persistPlayerData(allPlayerData) {
     var PlayerData = mongoose.model(PLAYER_DATA_MODEL, PlayerDataSchema);
@@ -16,8 +18,11 @@ function persistPlayerData(allPlayerData) {
             , photoId      : `https://platform-static-files.s3.amazonaws.com/premierleague/photos/players/110x140/p${p.photo}.png`.replace('.jpg', '')
             , status      : p.status
             , teamCode      : p.team
+            , positionId      : p.element_type
             , costNow      : p.now_cost * 100000
             , costChangeStart      : p.cost_change_start * 100000
+            , chanceOfPlayingThisRoundPercent : p.chance_of_playing_this_round
+            , chanceOfPlayingNextRoundPercent : p.chance_of_playing_next_round
             , inDreamTeam      : p.in_dreamteam
             , dreamTeamCount      : p.dreamteam_count
             , selectedByPercent      : p.selected_by_percent
@@ -61,17 +66,24 @@ module.exports = class PlayerDataDAO {
     retrievePlayerByName(name, callback) {
         var PlayerData = mongoose.model(PLAYER_DATA_MODEL, PlayerDataSchema);
         PlayerData.findOne( { 'fullName': name }, function (err, player) {
-            callback(player);
+            let players = [];
+            players.push(player)
+            callback(players);
         });
     }
 
-    retrievePlayerByCriteria(body, callback) {
-        var PlayerData = mongoose.model(PLAYER_DATA_MODEL, PlayerDataSchema);
-        PlayerData.findOne({
-            position: body.pos,
-            costNow: { $lt: body.price},
-        }).
-        exec(callback);
+    retrievePlayersByCriteria(criteria, callback) {
+        const PlayerData = mongoose.model(PLAYER_DATA_MODEL, PlayerDataSchema);
+        const posId =  Constants.getElementIdByAbbrev(criteria.posId).elementId;
+        const price = criteria.budget * 1000000 + 1
+        PlayerData.find({
+            positionId: posId,
+            costNow: { $lt: price},
+        }, function (err, players) {
+            let filteredPlayers = filterPlayers(posId, players)
+            callback(filteredPlayers)
+        });
+
     }
 
     retrieveAllPlayersNames(callback) {
