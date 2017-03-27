@@ -11,7 +11,7 @@ class SearchBar extends Component {
         this.props.fetchTeams();
         this.state = {
             price: 0,
-            pos: "Goalkeeper"
+            pos: "GK"
         }
     }
 
