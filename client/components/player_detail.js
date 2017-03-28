@@ -1,24 +1,19 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import NumberFormat from 'react-number-format';
-
+var counter = 0;
 class PlayerDetail extends Component {
 
     componentWillMount() {
-        this.state = {
-            counter: 0
-        }
+        counter = 0;
     }
 
     increment = () => {
-        this.setState({
-            counter: this.state.counter + 1
-        })
-        if (this.props.playerDetail.length == this.state.counter + 1) {
-            this.setState({
-                counter: 0
-            })
+        counter++
+        if (this.props.playerDetail.length == counter) {
+            counter = 0;
         }
+        this.forceUpdate()
     }
 
     getTeam = (teamCode) => {
@@ -35,7 +30,7 @@ class PlayerDetail extends Component {
         //TODO: temp conditional logic until I implement resetting of counter between
         //new searches correctly.
         if (sizeNotOne) {
-            playerDetail = playerDetails[this.state.counter]
+            playerDetail = playerDetails[counter]
         } else {
             playerDetail = playerDetails[0]
         }
@@ -119,6 +114,7 @@ class PlayerDetail extends Component {
 }
 
 function mapStateToProps(state) {
+    counter = 0
     return {
         playerDetail: state.playerDetail,
         teams: state.teams
