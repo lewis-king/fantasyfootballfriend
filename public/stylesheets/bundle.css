@@ -366,7 +366,7 @@ header > p {
 }
 
 .slider-horizontal .rangeslider-horizontal, .slider-horizontal .rangeslider__fill, .slider-horizontal .rangeslider__handle {
-    border-radius: 0
+    border-radius: 50px
 }
 
 .slider-horizontal .rangeslider-horizontal {
@@ -378,7 +378,7 @@ header > p {
 }
 
 .slider-horizontal .rangeslider__handle {
-    width: 10px;
+    width: 30px;
     height: 30px
 }
 

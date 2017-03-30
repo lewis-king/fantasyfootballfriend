@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import NumberFormat from 'react-number-format';
+import ReactGA from 'react-ga';
 var counter = 0;
 class PlayerDetail extends Component {
 
@@ -44,6 +45,11 @@ class PlayerDetail extends Component {
         } else {
             return null;
         }
+        ReactGA.event({
+            category: 'View',
+            action: 'Display player details',
+            label: `${playerDetail.fullName}`
+        });
         return (
             <div>
                 <img src={playerDetail.photoId}></img>

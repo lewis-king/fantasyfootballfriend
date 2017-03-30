@@ -5,6 +5,10 @@ import reducers from './reducers';
 import promise from 'redux-promise';
 import { Provider } from 'react-redux';
 import Home from './components/home';
+import ReactGA from 'react-ga';
+import props from '../config/props'
+
+ReactGA.initialize(props.analytics);
 
 const createStoreWithMiddleware = applyMiddleware(
     promise

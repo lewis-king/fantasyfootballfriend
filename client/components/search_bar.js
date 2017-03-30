@@ -3,6 +3,7 @@ import Select from 'react-select';
 import Slider from 'react-rangeslider'
 import {connect} from 'react-redux';
 import {fetchPlayersNames, fetchPlayerData, fetchTeams, fetchPlayerDataByCriteria} from '../actions/index';
+import ReactGA from 'react-ga';
 
 class SearchBar extends Component {
 
@@ -31,6 +32,11 @@ class SearchBar extends Component {
     }
 
     logChange = (val) => {
+        ReactGA.event({
+            category: 'Player find',
+            action: 'Searched by autocomplete',
+            label: `${val.value}`
+        });
         this.props.fetchPlayerData(val.value);
     }
 
@@ -51,6 +57,11 @@ class SearchBar extends Component {
             posId: this.state.pos,
             budget: this.state.price
         }
+        ReactGA.event({
+            category: 'Player find',
+            action: 'Searched by criteria',
+            label: `Position: ${criteria.posId}, Transfer Budget: ${criteria.budget}`
+        });
         this.props.fetchPlayerDataByCriteria(criteria)
     }
 
