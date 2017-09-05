@@ -30,7 +30,7 @@ var PlayerDataSchema = new Schema({
     , creativity      : Number
     , threat      : Number
     , ict_index     : Number
-    , timestamp    : { type: Date, default: Date.now }
+    , timestamp    : Date
 });
 
 module.exports = PlayerDataSchema;
