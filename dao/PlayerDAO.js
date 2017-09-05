@@ -3,13 +3,16 @@ var mongoose = require('mongoose');
 var connection = require('./dbconnection');
 var PlayerDataSchema = require('./playerdata');
 const PLAYER_DATA_MODEL = 'PlayerData';
+const HISTORIC_PLAYER_DATA_MODEL = 'Historic_PlayerData'
 var Constants = require('../service/rules/constants');
 import filterPlayers from '../service/rules';
 
 function persistPlayerData(allPlayerData) {
-    var PlayerData = mongoose.model(PLAYER_DATA_MODEL, PlayerDataSchema);
-    PlayerData.remove({})
+    let PlayerData = mongoose.model(PLAYER_DATA_MODEL, PlayerDataSchema);
+    let HistoricPlayerData = mongoose.model(HISTORIC_PLAYER_DATA_MODEL, PlayerDataSchema);
+    PlayerData.remove(function(err, removed) {});
     var playerArr = [];
+    let dateTime = new Date;
     allPlayerData.elements.forEach(p => {
         var player = new PlayerData({
             firstName: p.first_name
@@ -41,12 +44,17 @@ function persistPlayerData(allPlayerData) {
             , creativity      : p.creativity
             , threat      : p.threat
             , ict_index     : p.ict_index
+            , timestamp    : dateTime
         })
         playerArr.push(player);
     });
     PlayerData.create(playerArr, function(err, results) {
         if (err) return console.error(err);
         console.log(`Players saved to the DB`)
+    })
+    HistoricPlayerData.create(playerArr, function(err, results) {
+        if (err) return console.error(err);
+        console.log(`Players added to historic data in the DB`)
     })
 }
 
