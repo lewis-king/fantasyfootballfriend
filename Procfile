@@ -1,2 +1,3 @@
 web:    babel-node ./bin/www
-clock:  node update-data-cron.js
+worker: node update-data-cron.js
+clock:  node clock.js
