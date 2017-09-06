@@ -13,3 +13,16 @@ Navigate to the top-level project directory
 To run:
 Navigate to the top-level project directory
 `npm start`
+
+**Heroku Deployment**
+
+Deploy to Heroku using the Heroku CLI
+git push heroku master
+
+Once successfully deployed the 'web' process will start
+
+**Start Clock process**
+heroku ps:scale clock=1
+
+**Start Worker process**
+heroku ps:scale worker=1
