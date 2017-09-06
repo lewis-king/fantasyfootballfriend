@@ -127,4 +127,4 @@ function mapStateToProps(state) {
     }
 }
 
-export default connect(mapStateToProps, {null})(PlayerDetail);
+export default connect(mapStateToProps)(PlayerDetail);
