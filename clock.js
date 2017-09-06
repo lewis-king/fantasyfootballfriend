@@ -1,4 +1,10 @@
-var updateData = require('./update-data-worker.js');
+//var updateData = require('./update-data-worker.js');
+updateData = function() {
+    console.log("Scheduled update data job running...");
+    var axios = require('axios')
+    axios.get("/PLData");
+}
+
 var CronJob = require('cron').CronJob;
 
 new CronJob({
