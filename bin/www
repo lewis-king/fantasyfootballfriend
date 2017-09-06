@@ -7,7 +7,6 @@
 var app = require('../app');
 var debug = require('debug')('fantasyfootballfriend:server');
 var http = require('http');
-var updateDataCron = require('../clock');
 
 /**
  * Get port from environment and store in Express.

@@ -1,5 +1,5 @@
 //var updateData = require('./update-data-worker.js');
-updateData = function() {
+var updateData = function() {
     console.log("Scheduled update data job running...");
     var axios = require('axios')
     axios.get("/PLData");
