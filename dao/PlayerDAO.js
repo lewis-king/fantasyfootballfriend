@@ -6,6 +6,7 @@ const PLAYER_DATA_MODEL = 'PlayerData';
 const HISTORIC_PLAYER_DATA_MODEL = 'Historic_PlayerData'
 var Constants = require('../service/rules/constants');
 import filterPlayers from '../service/rules';
+import {assembleBeforeAndNowHistoricPlayers} from '../service/player-service/historicPlayersHelper';
 
 function persistPlayerData(allPlayerData) {
     let PlayerData = mongoose.model(PLAYER_DATA_MODEL, PlayerDataSchema);
@@ -30,6 +31,8 @@ function persistPlayerData(allPlayerData) {
             , dreamTeamCount      : p.dreamteam_count
             , selectedByPercent      : p.selected_by_percent
             , form      : p.form
+            , transfersInForGW: p.transfers_in_event
+            , transfersOutForGW: p.transfers_out_event
             , totalPoints : p.total_points
             , avgPointsPerGame      : p.points_per_game
             , goalsScored      : p.goals_scored
@@ -67,6 +70,20 @@ module.exports = class PlayerDataDAO {
     retrieveAllPlayerData(callback) {
         var PlayerData = mongoose.model(PLAYER_DATA_MODEL, PlayerDataSchema);
         PlayerData.find({}, function (err, players) {
+            callback(players);
+        });
+    }
+
+    retrieveAllHistoricPlayerData(callback) {
+        var PlayerData = mongoose.model(HISTORIC_PLAYER_DATA_MODEL, PlayerDataSchema);
+        PlayerData.find({}, 'fullName costNow timestamp avgPointsPerGame totalPoints ')
+            .where('totalPoints').gt(0)
+            .sort('-timestamp')
+            .limit(1100)
+            .select({})
+            .exec(function (err, players) {
+            console.log(players);
+            players = assembleBeforeAndNowHistoricPlayers(players);
             callback(players);
         });
     }

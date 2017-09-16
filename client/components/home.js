@@ -1,7 +1,4 @@
 import React, {Component} from 'react';
-import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
-import {fetchPlayersNames} from '../actions/index';
 import SearchBar from './search_bar';
 import PlayerDetail from './player_detail';
 import ReactGA from 'react-ga';

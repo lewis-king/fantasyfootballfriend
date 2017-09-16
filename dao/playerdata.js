@@ -16,6 +16,8 @@ var PlayerDataSchema = new Schema({
     , dreamTeamCount      : Number
     , selectedByPercent      : Number
     , form      : Number
+    , transfersInForGW : Number
+    , transfersOutForGW : Number
     , totalPoints : Number
     , avgPointsPerGame      : Number
     , goalsScored      : Number

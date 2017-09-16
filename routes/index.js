@@ -23,6 +23,13 @@ router.get('/allPlayers', function (req, res, next) {
     });
 });
 
+router.get('/allPlayersHistory', function (req, res, next) {
+    playerService.retrieveAllHistoricPlayerData(function (payload) {
+        res.setHeader('Content-Type', 'application/json');
+        res.json(payload);
+    });
+});
+
 router.get('/players/:name', function (req, res, next) {
     playerService.retrievePlayerByName(req.params['name'], function (payload) {
         res.setHeader('Content-Type', 'application/json');

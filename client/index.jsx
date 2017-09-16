@@ -4,9 +4,10 @@ import { createStore, applyMiddleware } from 'redux';
 import reducers from './reducers';
 import promise from 'redux-promise';
 import { Provider } from 'react-redux';
-import Home from './components/home';
+import AppContainer from './components/appContainer';
 import ReactGA from 'react-ga';
 import props from '../config/props'
+import { BrowserRouter } from 'react-router-dom';
 
 ReactGA.initialize(props.analytics);
 
@@ -17,9 +18,11 @@ const createStoreWithMiddleware = applyMiddleware(
 class App extends React.Component {
     render () {
         return (
-            <Provider store={createStoreWithMiddleware(reducers)}>
-                <Home />
-            </Provider>
+            <BrowserRouter>
+                <Provider store={createStoreWithMiddleware(reducers)}>
+                    <AppContainer />
+                </Provider>
+            </BrowserRouter>
         );
     }
 }
