@@ -76,7 +76,7 @@ module.exports = class PlayerDataDAO {
 
     retrieveAllHistoricPlayerData(callback) {
         var PlayerData = mongoose.model(HISTORIC_PLAYER_DATA_MODEL, PlayerDataSchema);
-        PlayerData.find({}, 'fullName costNow timestamp avgPointsPerGame totalPoints ')
+        PlayerData.find({}, 'fullName costNow timestamp avgPointsPerGame totalPoints transfersInForGW transfersOutForGW')
             .where('totalPoints').gt(0)
             .sort('-timestamp')
             .limit(1100)

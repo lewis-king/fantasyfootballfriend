@@ -6,7 +6,7 @@ const Header = () => (
         <nav className="navbar navbar-default">
             <div className="container-fluid">
                 <div className="navbar-header">
-                    <div className="navbar-link pull-left">
+                    <div className="navbar-link pull-left navbar-links">
                         <Link to='/'>Home</Link>
                         <Link to='/trending'>Trending</Link>
                     </div>

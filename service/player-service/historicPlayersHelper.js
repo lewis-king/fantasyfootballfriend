@@ -20,6 +20,8 @@ export function assembleBeforeAndNowHistoricPlayers(allHistoricPlayers) {
             }
         }
     })
+    filterHistoricPlayers(beforeList, nowList);
+
     let beforeAndNow = {
         before: beforeList,
         now: nowList
@@ -30,6 +32,27 @@ export function assembleBeforeAndNowHistoricPlayers(allHistoricPlayers) {
 /**
  * This function reduces the lists to only include players of trending relevance
  */
-function filterHistoricPlayers() {
+function filterHistoricPlayers(beforeList, nowList) {
+    beforeList.sort(compareFullName);
+    nowList.sort(compareFullName);
 
+    nowList.sort(compareTransfersIn);
+    nowList = nowList.slice(0, 25);
+
+}
+
+function compareFullName(a, b) {
+    if (a.fullName < b.fullName)
+        return -1;
+    if (a.fullName > b.fullName)
+        return 1;
+    return 0;
+}
+
+function compareTransfersIn(a, b) {
+    if (a.transfersInForGW > b.transfersInForGW)
+        return -1;
+    if (a.transfersInForGW < b.transfersInForGW)
+        return 1;
+    return 0;
 }
