@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {fetchAllHistoricPlayerData} from '../actions/index';
 import NumberFormat from 'react-number-format';
 import ReactGA from 'react-ga';
+import DateFormat from 'dateformat';
 
 class Trending extends Component {
 
@@ -19,40 +20,46 @@ class Trending extends Component {
     }
 
     render() {
-        const playerDetails = this.props.playerDetail;
-        const {before, now} = playerDetails;
-        const date = now ? now["0"].timestamp["0"] : new Date();
-        if (!now) return null;
+        const trendingPlayers = this.props.playerDetail;
+        let dateBefore = trendingPlayers.length != 0 ? trendingPlayers["0"].beforeDate : null;
+        let dateNow = trendingPlayers.length != 0 ? trendingPlayers["0"].nowDate : null;
+        const dateFormatStr = "GMT:dd-mm-yy, H:MM";
+        dateBefore = dateBefore ? DateFormat(dateBefore, dateFormatStr) : null;
+        dateNow = dateNow ? DateFormat(dateNow, dateFormatStr) : null;
+        if (!trendingPlayers) return null;
         return (
             <div>
                 <table>
                     <tbody>
                     <tr>
-                        <th colSpan="4">Was (as of {date})</th>
-                        {/*<th colSpan="4">Now (as of today)</th>*/}
+                        <th colSpan="1"></th>
+                        <th colSpan="3">Was (as of {dateBefore})</th>
+                        <th colSpan="3">Now (as of {dateNow})</th>
+                        <th colSpan="1">Net (+/-)</th>
                     </tr>
                     <tr>
                         <th colSpan="1">Name</th>
                         <th colSpan="1">Cost</th>
                         <th colSpan="1">Transfers In</th>
                         <th colSpan="1">Transfers Out</th>
-                        {/*<td colSpan="1">Name</td>
-                        <td colSpan="1">Cost</td>
-                        <td colSpan="1">Transfers In</td>
-                        <td colSpan="1">Transfers Out</td>*/}
+                        <th colSpan="1">Cost</th>
+                        <th colSpan="1">Transfers In</th>
+                        <th colSpan="1">Transfers Out</th>
+                        <th colSpan="1">Transfers</th>
                     </tr>
-                    {now.map(player => (
+                    {trendingPlayers.map(player => (
                         <tr>
                             <td colSpan="1">{player.fullName}</td>
-                            <td><NumberFormat value={player.costNow} displayType={'text'}
+                            <td><NumberFormat value={player.beforeTransferFee} displayType={'text'}
                                               thousandSeparator={true} prefix={'£'}/></td>
-                            <td colSpan="1">{player.transfersInForGW}</td>
-                            <td colSpan="1">{player.transfersOutForGW}</td>
-                            {/*<td colSpan="1">{player.fullName}</td>
-                            <td><NumberFormat value={player.costNow} displayType={'text'}
+                            <td colSpan="1">{player.beforeTransfersIn}</td>
+                            <td colSpan="1">{player.beforeTransfersOut}</td>
+
+                            <td><NumberFormat value={player.nowTransferFee} displayType={'text'}
                                               thousandSeparator={true} prefix={'£'}/></td>
-                            <td colSpan="1">{player.transfersInForGW}</td>
-                            <td colSpan="1">{player.transfersOutForGW}</td>*/}
+                            <td colSpan="1">{player.nowTransfersIn}</td>
+                            <td colSpan="1">{player.nowTransfersOut}</td>
+                            <td colSpan="1">{player.netTransfers}</td>
                         </tr>
                     ))}
 

@@ -22,11 +22,30 @@ export function assembleBeforeAndNowHistoricPlayers(allHistoricPlayers) {
     })
     filterHistoricPlayers(beforeList, nowList);
 
-    let beforeAndNow = {
-        before: beforeList,
-        now: nowList
-    }
-    return beforeAndNow;
+    let trendingPlayers = []
+    nowList.map((player, index) => {
+        let beforePlayer = beforeList[index];
+        if (player.fullName === beforePlayer.fullName) {
+            trendingPlayers.push({
+                nowDate: player.timestamp,
+                beforeDate: beforePlayer.timestamp,
+                fullName: player.fullName,
+                beforeTransferFee: beforePlayer.costNow,
+                nowTransferFee: player.costNow,
+                beforeTransfersIn: beforePlayer.transfersInForGW,
+                beforeTransfersOut: beforePlayer.transfersOutForGW,
+                nowTransfersIn: player.transfersInForGW,
+                nowTransfersOut: player.transfersOutForGW,
+                netTransfersIn: (player.transfersInForGW - beforePlayer.transfersInForGW),
+                netTransfersOut: (player.transfersOutForGW - beforePlayer.transfersOutForGW),
+                netTransfers: ((player.transfersInForGW - beforePlayer.transfersInForGW) -
+                (player.transfersOutForGW - beforePlayer.transfersOutForGW)),
+                priceChange: (player.costNow - beforePlayer.costNow)
+            })
+        }
+    });
+
+    return trendingPlayers.sort(compareTransfersIn);
 }
 
 /**
@@ -35,10 +54,6 @@ export function assembleBeforeAndNowHistoricPlayers(allHistoricPlayers) {
 function filterHistoricPlayers(beforeList, nowList) {
     beforeList.sort(compareFullName);
     nowList.sort(compareFullName);
-
-    nowList.sort(compareTransfersIn);
-    nowList = nowList.slice(0, 25);
-
 }
 
 function compareFullName(a, b) {
@@ -50,9 +65,9 @@ function compareFullName(a, b) {
 }
 
 function compareTransfersIn(a, b) {
-    if (a.transfersInForGW > b.transfersInForGW)
+    if (a.netTransfers > b.netTransfers)
         return -1;
-    if (a.transfersInForGW < b.transfersInForGW)
+    if (a.netTransfers < b.netTransfers)
         return 1;
     return 0;
 }
