@@ -11,7 +11,7 @@ const Header = () => (
         </Navbar.Header>
         <Nav>
             <NavItem>
-                <Link to='/'>Home</Link>
+                <Link to='/'>Player Search</Link>
             </NavItem>
             <NavItem>
                 <Link to='/trending'>Trending</Link>

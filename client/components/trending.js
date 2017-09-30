@@ -4,6 +4,7 @@ import {fetchAllHistoricPlayerData} from '../actions/index';
 import NumberFormat from 'react-number-format';
 import ReactGA from 'react-ga';
 import DateFormat from 'dateformat';
+import {Table} from 'react-bootstrap';
 
 class Trending extends Component {
 
@@ -26,11 +27,13 @@ class Trending extends Component {
         const dateFormatStr = "GMT:dd-mm-yy, H:MM";
         dateBefore = dateBefore ? DateFormat(dateBefore, dateFormatStr) : null;
         dateNow = dateNow ? DateFormat(dateNow, dateFormatStr) : null;
-        if (!trendingPlayers) return null;
+        if (!trendingPlayers) return (
+            <div>Loading... A spinner would be nice right...</div>
+        );
         return (
             <div>
-                <table>
-                    <tbody>
+                <Table responsive>
+                    <thead>
                     <tr>
                         <th colSpan="1"></th>
                         <th colSpan="1">Start of Season</th>
@@ -67,16 +70,15 @@ class Trending extends Component {
                                               thousandSeparator={true} prefix={'£'}/></td>
                             <td className="trending-table" colSpan="1">{player.nowTransfersIn}</td>
                             <td className="trending-table" colSpan="1">{player.nowTransfersOut}</td>
-                            <td className="trending-table" colSpan="1">{player.netTransfers}</td>
-                            <td><NumberFormat value={player.transferFeeCostChangeStart} displayType={'text'}
+                            <td className={"trending-table " + ((player.netTransfers > 0) ? 'pos' : 'neg')} colSpan="1">{player.netTransfers}</td>
+                            <td className={((player.transferFeeCostChangeStart > 0) ? 'pos' : 'neg')}><NumberFormat value={player.transferFeeCostChangeStart} displayType={'text'}
                                               thousandSeparator={true} prefix={'£'}/></td>
-                            <td><NumberFormat value={player.transferFeeCostChangeForGW} displayType={'text'}
+                            <td className={((player.transferFeeCostChangeStart > 0) ? 'pos' : 'neg')}><NumberFormat value={player.transferFeeCostChangeForGW} displayType={'text'}
                                               thousandSeparator={true} prefix={'£'}/></td>
                         </tr>
                     ))}
-
-                    </tbody>
-                </table>
+                    </thead>
+                </Table>
             </div>
         )
     }
