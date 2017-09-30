@@ -25,6 +25,7 @@ function persistPlayerData(allPlayerData) {
             , positionId      : p.element_type
             , costNow      : p.now_cost * 100000
             , costChangeStart      : p.cost_change_start * 100000
+            , costChangeForGW : p.cost_change_event * 100000
             , chanceOfPlayingThisRoundPercent : p.chance_of_playing_this_round
             , chanceOfPlayingNextRoundPercent : p.chance_of_playing_next_round
             , inDreamTeam      : p.in_dreamteam
@@ -76,7 +77,8 @@ module.exports = class PlayerDataDAO {
 
     retrieveAllHistoricPlayerData(callback) {
         var PlayerData = mongoose.model(HISTORIC_PLAYER_DATA_MODEL, PlayerDataSchema);
-        PlayerData.find({}, 'fullName costNow timestamp avgPointsPerGame totalPoints transfersInForGW transfersOutForGW')
+        PlayerData.find({}, 'fullName costNow costChangeStart costChangeForGW timestamp avgPointsPerGame totalPoints ' +
+            'transfersInForGW transfersOutForGW')
             .where('totalPoints').gt(0)
             .sort('-timestamp')
             .limit(1100)

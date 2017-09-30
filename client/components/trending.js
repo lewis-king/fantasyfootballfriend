@@ -33,33 +33,45 @@ class Trending extends Component {
                     <tbody>
                     <tr>
                         <th colSpan="1"></th>
-                        <th colSpan="3">Was (as of {dateBefore})</th>
-                        <th colSpan="3">Now (as of {dateNow})</th>
-                        <th colSpan="1">Net (+/-)</th>
+                        <th colSpan="1">Start of Season</th>
+                        <th colSpan="1">Start of Gameweek</th>
+                        <th colSpan="2">As of {dateBefore}</th>
+                        <th colSpan="3">As of {dateNow}</th>
+                        <th colSpan="3">Net (+/-)</th>
                     </tr>
                     <tr>
                         <th colSpan="1">Name</th>
-                        <th colSpan="1">Cost</th>
-                        <th colSpan="1">Transfers In</th>
-                        <th colSpan="1">Transfers Out</th>
-                        <th colSpan="1">Cost</th>
-                        <th colSpan="1">Transfers In</th>
-                        <th colSpan="1">Transfers Out</th>
-                        <th colSpan="1">Transfers</th>
+                        <th colSpan="1">Transfer Fee</th>
+                        <th colSpan="1">Transfer Fee</th>
+                        <th className="trending-table" colSpan="1">Gameweek Transfers In</th>
+                        <th className="trending-table" colSpan="1">Gameweek Transfers Out</th>
+                        <th colSpan="1">Transfer Fee</th>
+                        <th className="trending-table" colSpan="1">Gameweek Transfers In</th>
+                        <th className="trending-table" colSpan="1">Gameweek Transfers Out</th>
+                        <th className="trending-table" colSpan="1">Transfers (last 24hrs)</th>
+                        <th className="trending-table" colSpan="1">Transfer Fee (Start of Season)</th>
+                        <th className="trending-table" colSpan="1">Transfer Fee (Start of Gameweek)</th>
                     </tr>
                     {trendingPlayers.map(player => (
-                        <tr>
+                        <tr className="trending-table">
+
                             <td colSpan="1">{player.fullName}</td>
-                            <td><NumberFormat value={player.beforeTransferFee} displayType={'text'}
+                            <td><NumberFormat value={player.transferFeeStartSeason} displayType={'text'}
                                               thousandSeparator={true} prefix={'£'}/></td>
-                            <td colSpan="1">{player.beforeTransfersIn}</td>
-                            <td colSpan="1">{player.beforeTransfersOut}</td>
+                            <td><NumberFormat value={player.transferFeeStartGW} displayType={'text'}
+                                              thousandSeparator={true} prefix={'£'}/></td>
+                            <td className="trending-table" colSpan="1">{player.beforeTransfersIn}</td>
+                            <td className="trending-table" colSpan="1">{player.beforeTransfersOut}</td>
 
                             <td><NumberFormat value={player.nowTransferFee} displayType={'text'}
                                               thousandSeparator={true} prefix={'£'}/></td>
-                            <td colSpan="1">{player.nowTransfersIn}</td>
-                            <td colSpan="1">{player.nowTransfersOut}</td>
-                            <td colSpan="1">{player.netTransfers}</td>
+                            <td className="trending-table" colSpan="1">{player.nowTransfersIn}</td>
+                            <td className="trending-table" colSpan="1">{player.nowTransfersOut}</td>
+                            <td className="trending-table" colSpan="1">{player.netTransfers}</td>
+                            <td><NumberFormat value={player.transferFeeCostChangeStart} displayType={'text'}
+                                              thousandSeparator={true} prefix={'£'}/></td>
+                            <td><NumberFormat value={player.transferFeeCostChangeForGW} displayType={'text'}
+                                              thousandSeparator={true} prefix={'£'}/></td>
                         </tr>
                     ))}
 

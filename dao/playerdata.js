@@ -10,6 +10,7 @@ var PlayerDataSchema = new Schema({
     , teamCode      : Number
     , costNow      : Number
     , costChangeStart      : Number
+    , costChangeForGW : Number
     , chanceOfPlayingThisRoundPercent : Number
     , chanceOfPlayingNextRoundPercent : Number
     , inDreamTeam      : Boolean
