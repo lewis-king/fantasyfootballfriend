@@ -71,9 +71,9 @@ class Trending extends Component {
                             <td className="trending-table" colSpan="1">{player.nowTransfersIn}</td>
                             <td className="trending-table" colSpan="1">{player.nowTransfersOut}</td>
                             <td className={"trending-table " + ((player.netTransfers >= 0) ? 'pos' : 'neg')} colSpan="1">{player.netTransfers}</td>
-                            <td className={"trending-table " + ((player.transferFeeCostChangeStart >= 0) ? 'pos' : 'neg')} colSpan="1"><NumberFormat value={player.transferFeeCostChangeStart} displayType={'text'}
+                            <td className={"trending-table " + ((player.transferFeeChangeStart >= 0) ? 'pos' : 'neg')} colSpan="1"><NumberFormat value={player.transferFeeChangeStart} displayType={'text'}
                                               thousandSeparator={true} prefix={'£'}/></td>
-                            <td className={"trending-table " + ((player.transferFeeCostChangeStart >= 0) ? 'pos' : 'neg')} colSpan="1"><NumberFormat value={player.transferFeeCostChangeForGW} displayType={'text'}
+                            <td className={"trending-table " + ((player.transferFeeChangeForGW >= 0) ? 'pos' : 'neg')} colSpan="1"><NumberFormat value={player.transferFeeChangeForGW} displayType={'text'}
                                               thousandSeparator={true} prefix={'£'}/></td>
                         </tr>
                     ))}
