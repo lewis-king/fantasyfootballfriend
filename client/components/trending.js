@@ -21,8 +21,8 @@ class Trending extends Component {
 
     render() {
         const trendingPlayers = this.props.playerDetail;
-        let dateBefore = trendingPlayers.length != 0 ? trendingPlayers["0"].beforeDate : null;
-        let dateNow = trendingPlayers.length != 0 ? trendingPlayers["0"].nowDate : null;
+        let dateBefore = trendingPlayers.length !== 0 ? trendingPlayers["0"].beforeDate : null;
+        let dateNow = trendingPlayers.length !== 0 ? trendingPlayers["0"].nowDate : null;
         const dateFormatStr = "GMT:dd-mm-yy, H:MM";
         dateBefore = dateBefore ? DateFormat(dateBefore, dateFormatStr) : null;
         dateNow = dateNow ? DateFormat(dateNow, dateFormatStr) : null;

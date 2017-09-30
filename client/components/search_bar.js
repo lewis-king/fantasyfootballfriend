@@ -18,13 +18,13 @@ class SearchBar extends Component {
 
 
     options() {
-        var fullNames = [];
+        let fullNames = [];
         if (this.props.playersNames.length > 0) {
             this.props.playersNames.forEach(player => {
                 let fullName = {
                     'value': player.fullName,
                     'label': player.fullName
-                }
+                };
                 fullNames.push(fullName)
             })
         }
@@ -38,38 +38,38 @@ class SearchBar extends Component {
             label: `${val.value}`
         });
         this.props.fetchPlayerData(val.value);
-    }
+    };
 
     handleOnChange = (val) => {
         this.setState({
             price: val
         })
-    }
+    };
 
     posVal = (event) => {
         this.setState({
             pos: event.target.value
         })
-    }
+    };
 
     searchSubmit = () => {
         let criteria = {
             posId: this.state.pos,
             budget: this.state.price
-        }
+        };
         ReactGA.event({
             category: 'Player find',
             action: 'Searched by criteria',
             label: `Position: ${criteria.posId}, Transfer Budget: ${criteria.budget}`
         });
         this.props.fetchPlayerDataByCriteria(criteria)
-    }
+    };
 
     render() {
-        let {price} = this.state
+        let {price} = this.state;
         const formatMillions = price => {
             return (Math.round(price * 10) / 10) + ' Mil (£)';
-        }
+        };
         return (
             <div>
                 <Select

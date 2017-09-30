@@ -7,6 +7,6 @@ const AppContainer = () => (
         <Header />
         <Main />
     </div>
-)
+);
 
 export default AppContainer

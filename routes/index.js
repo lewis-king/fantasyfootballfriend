@@ -3,8 +3,6 @@ var router = express.Router();
 var playerService = require('../service/player-service');
 var teamService = require('../service/team-service');
 
-import React from 'react'
-
 /* GET home page. */
 router.get('/', function (req, res, next) {
     res.sendFile('index.html', {});
