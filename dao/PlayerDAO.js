@@ -3,7 +3,7 @@ var mongoose = require('mongoose');
 var connection = require('./dbconnection');
 var PlayerDataSchema = require('./playerdata');
 const PLAYER_DATA_MODEL = 'PlayerData';
-const HISTORIC_PLAYER_DATA_MODEL = 'Historic_PlayerData'
+const HISTORIC_PLAYER_DATA_MODEL = 'Historic_PlayerData';
 var Constants = require('../service/rules/constants');
 import filterPlayers from '../service/rules';
 import {assembleBeforeAndNowHistoricPlayers} from '../service/player-service/historicPlayersHelper';

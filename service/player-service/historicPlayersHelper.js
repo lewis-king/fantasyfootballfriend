@@ -24,7 +24,7 @@ export function assembleBeforeAndNowHistoricPlayers(allHistoricPlayers) {
 
     let trendingPlayers = []
     nowList.map((player, index) => {
-        let beforePlayer = beforeList[index];
+        let beforePlayer = beforeList.find(element => element.fullName === player.fullName);
         if ((player && beforePlayer) && (player.fullName === beforePlayer.fullName)) {
             const transferFeeStartSeason = player.costNow - player.costChangeStart;
             const transferFeeStartGW = player.costNow - player.costChangeForGW;
