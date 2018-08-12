@@ -15,10 +15,11 @@ router.get('/PLData', function (req, res, next) {
 });
 
 router.get('/allPlayers', function (req, res, next) {
+    const sortCriteria = req.query.sort;
     playerService.retrieveAllPlayerData(function (payload) {
         res.setHeader('Content-Type', 'application/json');
         res.json(payload);
-    });
+    }, sortCriteria);
 });
 
 router.get('/allPlayersHistory', function (req, res, next) {

@@ -4,6 +4,7 @@ export const FETCH_PLAYERS_NAMES = 'FETCH_PLAYERS_NAMES';
 export const FETCH_TEAMS = 'FETCH_TEAMS';
 export const FETCH_PLAYER_DATA = 'FETCH_PLAYER_DATA';
 export const FETCH_HISTORIC_PLAYER_DATA = 'FETCH_HISTORIC_PLAYER_DATA';
+export const FETCH_ALL_PLAYER_DATA = "FETCH_ALL_PLAYER_DATA";
 
 const FETCH_PLAYERS_NAMES_URL = '/playersNames';
 const FETCH_TEAMS_URL = '/allTeams';
@@ -34,16 +35,26 @@ export function fetchPlayerData(name) {
 }
 
 export function fetchAllHistoricPlayerData() {
-    const request = axios.get('/allPlayersHistory')
+    const request = axios.get('/allPlayersHistory');
     return returnObj(FETCH_PLAYER_DATA, request);
 }
 
+export function fetchAllPlayerData(sortCriteria) {
+  const request = axios.get(`/allPlayers?sort=${sortCriteria}`);
+  return returnObj(FETCH_ALL_PLAYER_DATA, request);
+}
+
+export function fetchAllPlayerDataSorted(sortCriteria) {
+  const request = axios.get(`/allPlayers?sort=${sortCriteria}`);
+  return returnObj(FETCH_ALL_PLAYER_DATA, request);
+}
+
 export function fetchPlayerDataByCriteria(criteria) {
-    let {posId, budget} = criteria
+    let {posId, budget} = criteria;
     const request = axios.post('/players', {
             posId,
             budget
-    })
+    });
     return {
         type: FETCH_PLAYER_DATA,
         payload: request

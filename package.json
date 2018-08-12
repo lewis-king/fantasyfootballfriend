@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "postinstall": "webpack -p",
-    "start": "babel-node ./bin/www"
+    "start": "babel-node ./bin/www --inspect"
   },
   "dependencies": {
     "axios": "^0.15.3",
@@ -19,7 +19,7 @@
     "cookie-parser": "~1.4.3",
     "cron": "^1.2.1",
     "dateformat": "^2.0.0",
-    "debug": "~2.2.0",
+    "debug": "~2.6.9",
     "express": "^4.14.1",
     "express-react-views": "^0.10.2",
     "file-loader": "^0.10.0",
@@ -38,7 +38,7 @@
     "react-rangeslider": "^2.0.1",
     "react-redux": "^5.0.2",
     "react-router-dom": "^4.2.2",
-    "react-select": "^1.0.0-rc.3",
+    "react-select": "^2.0.0",
     "reactify": "^1.1.1",
     "redux": "^3.6.0",
     "redux-promise": "^0.5.3",

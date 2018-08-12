@@ -14,6 +14,10 @@ To run:
 Navigate to the top-level project directory
 `npm start`
 
+To debug server:
+`babel-node ./bin/www --inspect`
+Then attach debugger to port 9229 (default).
+
 **Heroku Deployment**
 
 Deploy to Heroku using the Heroku CLI

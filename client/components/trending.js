@@ -27,9 +27,9 @@ class Trending extends Component {
         const dateFormatStr = "GMT:dd-mm-yy, H:MM";
         dateBefore = dateBefore ? DateFormat(dateBefore, dateFormatStr) : null;
         dateNow = dateNow ? DateFormat(dateNow, dateFormatStr) : null;
-        if (!trendingPlayers) return (
-            <div>Loading... A spinner would be nice right...</div>
-        );
+        if (this.props.playerDetail.length == 0) {
+          return <img className="spinner" src="assets/Spinner.svg"/>
+        }
         return (
             <div>
                 <Table responsive>

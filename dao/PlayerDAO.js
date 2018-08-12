@@ -68,11 +68,17 @@ module.exports = class PlayerDataDAO {
         persistPlayerData(allPlayerData);
     }
 
-    retrieveAllPlayerData(callback) {
+    retrieveAllPlayerData(callback, sortCriteria) {
         var PlayerData = mongoose.model(PLAYER_DATA_MODEL, PlayerDataSchema);
-        PlayerData.find({}, function (err, players) {
+        if (!sortCriteria) {
+          PlayerData.find({}, function (err, players) {
             callback(players);
-        });
+          });
+        } else {
+          PlayerData.find({}).sort(`-${sortCriteria}`).exec(function (err, players) {
+            callback(players);
+          });
+        }
     }
 
     retrieveAllHistoricPlayerData(callback) {

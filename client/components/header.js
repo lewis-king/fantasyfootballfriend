@@ -16,8 +16,11 @@ const Header = () => (
             <NavItem>
                 <Link to='/trending'>Trending</Link>
             </NavItem>
+          <NavItem>
+            <Link to='/top-picked'>Top Picked</Link>
+          </NavItem>
         </Nav>
     </Navbar>
-)
+);
 
 export default Header

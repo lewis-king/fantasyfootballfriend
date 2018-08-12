@@ -13,8 +13,8 @@ function saveAllPlayerAndTeamData() {
     });
 }
 
-function retrieveAllPlayerData(callback) {
-    playerDataDAO.retrieveAllPlayerData(callback);
+function retrieveAllPlayerData(callback, sortCriteria) {
+    playerDataDAO.retrieveAllPlayerData(callback, sortCriteria);
 }
 
 function retrieveAllHistoricPlayerData(callback) {
