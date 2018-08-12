@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "postinstall": "webpack -p",
-    "start": "babel-node ./bin/www --inspect"
+    "start": "babel-node ./bin/www"
   },
   "dependencies": {
     "axios": "^0.15.3",
