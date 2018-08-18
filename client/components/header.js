@@ -17,7 +17,7 @@ const Header = () => (
                 <Link to='/trending'>Trending</Link>
             </NavItem>
           <NavItem>
-            <Link to='/top-picked'>Top Picked</Link>
+            <Link to='/sorting'>Sorting</Link>
           </NavItem>
         </Nav>
     </Navbar>

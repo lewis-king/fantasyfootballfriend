@@ -59,6 +59,10 @@ class PlayerDetail extends Component {
                         <th colSpan="2">{playerDetail.fullName}</th>
                     </tr>
                     <tr>
+                      <td>Avg. Points per game</td>
+                      <td>{playerDetail.avgPointsPerGame}</td>
+                    </tr>
+                    <tr>
                         <td>Form</td>
                         <td>{playerDetail.form}</td>
                     </tr>
@@ -70,10 +74,6 @@ class PlayerDetail extends Component {
                     <tr>
                         <td>Total points</td>
                         <td>{playerDetail.totalPoints}</td>
-                    </tr>
-                    <tr>
-                        <td>Avg. Points per game</td>
-                        <td>{playerDetail.avgPointsPerGame}</td>
                     </tr>
                     <tr>
                         <td>Selected by</td>
@@ -103,10 +103,10 @@ class PlayerDetail extends Component {
                         <td>Threat</td>
                         <td>{playerDetail.threat}</td>
                     </tr>
-                    <tr>
+                    {/*<tr>
                         <td>Upcoming opposition</td>
                         <td>{nextOpponent.name}</td>
-                    </tr>
+                    </tr>*/}
                     </tbody>
                 </table>
                 {sizeNotOne ? (

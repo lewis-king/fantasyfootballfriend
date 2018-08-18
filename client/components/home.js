@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import SearchBar from './search_bar';
+import SearchBar from './player_search';
 import PlayerDetail from './player_detail';
 import ReactGA from 'react-ga';
 
